@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'IBM Plex Mono', monospace;
+    width: 100%;
+    height: auto;
+}
+
+ol {
+    list-style-type: none; /* Remove default numbering */
+    padding-left: 0;
+    width: 100%;
+    max-width: 95vw;
+}
+
+#main-cont {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+#leaderboard {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px 20px;
+}
+
+#profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+#players-list {
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+#search-bar {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    gap: 5px;
+}
+
+#search-input {
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    font-style: italic;
+}
+
+#search-results {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    gap:20px;
+}
+
+#search-results.hidden {
+    display: none; /* Hide the results container */
+}
+
+#nav-bar {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    font-size: 26px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#nav-bar a{
+    text-decoration: none;
+    color: #000000;
+}
+
+#profile-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    
+}
+
+#profile-champ-stats {
+    width: 400px;
+    justify-items: center;
+}
+
+#profile-history {
+    width: 800px;
+    justify-items: center;
+}
+
+#profile-general {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+    justify-items: center;
+}
+
+.ascii-title {
+    white-space: pre;
+}
+
+.title {
+    text-decoration: underline;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.player-item {
+    display: flex;
+    justify-content: space-between; /* Space out the items evenly */
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.player-rank, .player-name, .player-lp, .player-wl, .player-wr, .player-roles{
+    flex: 1; /* Make each span take equal space */
+    text-align: left; /* Align text to the left */
+}
+
+.player-rank {
+    max-width: 50px; /* Set a maximum width for the rank */
+}
+
+.player-lp {
+    text-align: right; /* Align LP to the right for better separation */
+    min-width: 100px;
+}
+
+.player-wl, .player-wr, .player-roles{
+    min-width: 120px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.regular-text {
+    font-size: 17px;
+}
+
+.button-text {
+    font-size: 26px;
+}
+
+.match {
+    display: flex;
+    flex-direction: row;
+    gap:5px;
+}
+
+/* styles.css */
+table {
+    width: auto;
+    border-collapse: collapse;
+    table-layout: auto;
+    white-space: nowrap;
+    display: flex;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.history-img {
+    padding: 0px;
+}
+
+th {
+    background-color: #000000;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #d1e7dd;
+}
+
+td {
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    height: 100px; /* Set a fixed height for the table cells */
+    border: 1px solid #ccc;
+    position: relative; /* Ensure positioning context for the image */
+    overflow: hidden; /* Hide any overflow */
+    text-align: center;
+}
+
+td img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire cell */
+    object-position: center; /* Centers the image */
+}
+
+tr.win {
+    background-color: #d4daed; /* Light green for wins */
+}
+tr.loss {
+    background-color: #f8d7da; /* Light red for losses */
+}
+tr:hover {
+    background-color: #e7e6d1;
+}
+
+
+

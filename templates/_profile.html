@@ -1,0 +1,85 @@
+<h1 class="title">{{ id }}</h1>
+
+         
+
+<div id="profile">
+    <div id="profile-container">
+        <div id="profile-champ-stats">
+            <h1 class="title">Stats</h1>
+            <table border="1">
+                <thead>
+                    <tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for champion in profile %}
+                    <tr>
+                        <td>
+                            <img src="https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/{{champion.champion}}.png" alt="{{champion.champion}}"> 
+                        </td>
+                        {% set kills = champion['SUM(kills)'] %}
+                        {% set deaths = champion['SUM(deaths)'] %}
+                        {% set assists = champion['SUM(assists)'] %}
+                        {% set kda = (kills + assists) / (deaths if deaths != 0 else 1) %}
+
+                        {% set games = champion.Games %}
+                        {% set wins = champion.winCount %}
+                        {% set wr = (wins / games) * 100%}
+                        <td>{{ kda|round(2) }} KDA</td>
+                        <td>{{ champion.Games }} Games</td>
+                        <td>{{ wr|round(0) }}% WR</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="profile-history">
+            <h1 class="title">Recent Games</h1>
+            <table>
+                <thead>
+                    <tr>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for h in history %}
+                    <tr class="{{ 'win' if h.ratingChange > 0 else 'loss' }}">
+                        <td class="history-img">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/{{ h["ifnull(PlayerMatch.champion, 'NA')"] }}.png" alt="{{ h["ifnull(PlayerMatch.champion, 'NA')"] }}"> 
+                        </td>
+                        <td>{{ h.time_since_match }}</td>
+                        <td>{{ h["ifnull(PlayerMatch.kills, 'NA')"] }}/{{ h["ifnull(PlayerMatch.deaths, 'NA')"] }}/{{ h["ifnull(PlayerMatch.assists, 'NA')"] }}</td>
+                        <td>{{ h.ratingChange }} LP</td>
+                        <td>{{ h.role }}</td>
+                        <td>{{ h.team }}</td>
+                        <td><a href="/match/{{h.matchID}}">ID: {{ h.matchID }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="profile-general">
+            <h1 class="title">Profile</h1>
+            <span>+++ PUL +++</span>
+            <span>Rank #{{ rank }}</span>
+            {% set details_games = details["winCount"] + details["lossCount"] %}
+            {% set details_wins = details.winCount %}
+            {% set details_wr = (details_wins / details_games) * 100%}
+            <span>{{ details_wr|round(2)}}% WR</span>
+            <span>W {{details.winCount}} / L {{ details.lossCount}}</span>
+            <span>{{details.leaderboardPoints|round()}} LP</span>
+            <br></br>
+            <span>+++ Betties +++</span>
+            <span>{{details.bettingPoints|round()}} BP</span>
+            <br></br>
+            <span>+++ Account/s +++</span>
+            {% for a in accounts %}
+            <span><a href="{{ a.opgg }}" target="_blank">{{a.name}}</a><span> Rank: {{ a.rankTier.upper() }}~</span></span>
+            {% endfor %}
+        </div>
+    </div>
+    
+    </div>
+</div>
+
+<script src="/static/playerSearch.js"></script>
