@@ -12,7 +12,7 @@ async function searchPlayers(query) {
             results.forEach(player => {
                 const listItem = document.createElement('div');
                 listItem.className = 'search-item';
-                listItem.innerHTML = `<a href="/player/${player.playerID}" target="_blank">${player.discordID}</a>`;
+                listItem.innerHTML = `<a href="/player/${player.playerID}" target="_blank">${player.discord_name}</a>`;
                 searchResults.appendChild(listItem);
             });
         }

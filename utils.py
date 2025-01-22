@@ -27,13 +27,13 @@ class Utils:
     
     def fetch_player_disc(self, player_id):
         conn = self.get_db_connection()
-        id = conn.execute('SELECT discordID FROM Player WHERE playerID = ?', (player_id,)).fetchall()
+        id = conn.execute('SELECT discordID, discord_name FROM Player WHERE playerID = ?', (player_id,)).fetchall()
         conn.close()
-        return id[0]['discordID']  
+        return id[0]['discordID'], id[0]['discord_name']  
     
     def fetch_players_paginated(self, offset, limit):
         conn = self.get_db_connection()
-        players = conn.execute('SELECT discordID, playerID, winCount, lossCount, primaryRole, secondaryRole, ROUND(leaderboardPoints, 0) AS leaderboardPoints FROM Player ORDER BY leaderboardPoints DESC LIMIT ? OFFSET ?', (limit, offset)).fetchall()
+        players = conn.execute('SELECT discordID, discord_name, playerID, winCount, lossCount, primaryRole, secondaryRole, ROUND(leaderboardPoints, 0) AS leaderboardPoints FROM Player ORDER BY leaderboardPoints DESC LIMIT ? OFFSET ?', (limit, offset)).fetchall()
         conn.close()
         return [dict(player) for player in players]
     
@@ -110,13 +110,13 @@ class Utils:
                     
     def fetch_betties(self, offset, limit):
         conn = self.get_db_connection()
-        players = conn.execute('SELECT discordID, playerID, ROUND(bettingPoints, 0) AS bettingPoints FROM Player ORDER BY bettingPoints DESC LIMIT ? OFFSET ?', (limit, offset)).fetchall()
+        players = conn.execute('SELECT discordID, playerID, discord_name, ROUND(bettingPoints, 0) AS bettingPoints FROM Player ORDER BY bettingPoints DESC LIMIT ? OFFSET ?', (limit, offset)).fetchall()
         conn.close()
         return [dict(player) for player in players]
     
     def update_player_list(self):
         conn = self.get_db_connection()
-        players = conn.execute('SELECT playerID, discordID FROM Player').fetchall()
+        players = conn.execute('SELECT playerID, discordID, discord_name FROM Player').fetchall()
         conn.close()
         self.players_data = [dict(player) for player in players]
 

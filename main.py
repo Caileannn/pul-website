@@ -37,7 +37,7 @@ def get_betties():
 def player_detail(player_id):
     current_time = datetime.now()
     accounts = db_utils.fetch_player_accounts(player_id)
-    disc_id = db_utils.fetch_player_disc(player_id)
+    disc_id, disc_name = db_utils.fetch_player_disc(player_id)
     profile = db_utils.fetch_player_profile(disc_id)
     match_hisory = db_utils.fetch_player_history(disc_id)
     rank = db_utils.fetch_player_rank(disc_id)
@@ -60,7 +60,7 @@ def player_detail(player_id):
 
     if accounts is None:
         return "Player not found!", 404
-    return render_template('profile.html', profile=profile, accounts=accounts, history=match_hisory, id=disc_id, rank=rank, details=details)
+    return render_template('profile.html', profile=profile, accounts=accounts, history=match_hisory, id=disc_name, rank=rank, details=details)
 
 @app.route('/search')
 def search():
@@ -70,12 +70,12 @@ def search():
 
     # Try to convert query to integer for comparison
     try:
-        query_int = int(query)
+        query_int = query
     except ValueError:
         return jsonify([])
 
     # Filter players in memory using integer comparison
-    results = [player for player in db_utils.players_data if str(query_int) in str(player['discordID'])]
+    results = [player for player in db_utils.players_data if str(query_int) in str(player['discord_name'])]
     return jsonify(results[:5])
 
 if __name__ == '__main__':

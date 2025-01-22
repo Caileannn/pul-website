@@ -23,7 +23,7 @@ async function loadPlayers() {
 
                 listItem.innerHTML = `
                     <span class="player-rank">${rank}.</span>
-                    <a class="player-name" href="/player/${player.playerID}">${player.discordID}</a>
+                    <a class="player-name" href="/player/${player.playerID}">${player.discord_name}</a>
                     <span class="player-wr">${winRate}%</span>
                     <span class="player-wl">${player.winCount}W/${player.lossCount}L</span>
                     <span class="player-roles">${player.primaryRole}/${player.secondaryRole}</span>
@@ -44,7 +44,7 @@ async function loadPlayers() {
                 const rank = offset + index + 1;
                 listItem.innerHTML = `
                     <span class="player-rank">${rank}.</span>
-                    <a class="player-name" href="/player/${player.playerID}">${player.discordID}</a>
+                    <a class="player-name" href="/player/${player.playerID}">${player.discord_name}</a>
                     <span class="player-lp">${player.bettingPoints} BP</span>
                 `;
                 playersList.appendChild(listItem);
