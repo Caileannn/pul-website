@@ -60,21 +60,24 @@
         </div>
         <div id="profile-general">
             <h1 class="title">Profile</h1>
-            <span>+++ PUL +++</span>
-            <span>Rank #{{ rank }}</span>
+            <span class="profile-header">+++ PUL +++</span>
+            <span class="profile-text">Rank #{{ rank }}</span>
             {% set details_games = details["winCount"] + details["lossCount"] %}
             {% set details_wins = details.winCount %}
             {% set details_wr = (details_wins / details_games) * 100%}
-            <span>{{ details_wr|round(2)}}% WR</span>
-            <span>W {{details.winCount}} / L {{ details.lossCount}}</span>
-            <span>{{details.leaderboardPoints|round()}} LP</span>
+            {% set red = 255 - (details_wr * 2.55) %}
+            {% set green = details_wr * 2.55 %}
+            {% set color = 'rgb(' ~ red|round() ~ ', ' ~ green|round() ~ ', 0)' %}
+            <span class="profile-text" style="color: {{ color }}">{{ details_wr|round(2) }}% <span style="color: black">WR</span></span>
+            <span class="profile-text"><span style="color:blue;">W</span> {{details.winCount}} / <span style="color:red;">L</span> {{ details.lossCount}}</span>
+            <span class="profile-text">{{details.leaderboardPoints|round()}} LP</span>
             <br></br>
-            <span>+++ Betties +++</span>
-            <span>{{details.bettingPoints|round()}} BP</span>
+            <span class="profile-header">+++ Betties +++</span>
+            <span class="profile-text">{{details.bettingPoints|round()}} BP</span>
             <br></br>
-            <span>+++ Account/s +++</span>
+            <span class="profile-header">+++ Account/s +++</span>
             {% for a in accounts %}
-            <span><a href="{{ a.opgg }}" target="_blank">{{a.name}}</a><span> Rank: {{ a.rankTier.upper() }}~</span></span>
+            <span class="profile-text"><a href="{{ a.opgg }}" target="_blank">{{a.name}}</a><span class="profile-text"> Rank: {{ a.rankTier.upper() }}~</span></span>
             {% endfor %}
         </div>
     </div>

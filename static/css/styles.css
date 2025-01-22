@@ -96,7 +96,7 @@ ol {
 
 #profile-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
@@ -119,6 +119,16 @@ ol {
     gap: 10px;
     width: 400px;
     justify-items: center;
+}
+
+.profile-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 21px;
+}
+
+.profile-text {
+    font-size: 21px;
 }
 
 .ascii-title {
